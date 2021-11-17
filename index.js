@@ -16,6 +16,9 @@ app.get('/', (req, res)=>{
     res.render('home', {posts: posts})
   })
 })
+app.get('/del', (req,res)=>{
+  res.render('delete')
+})
 app.get('/cadastro', (req, res)=>{
   res.render('form')
 })
@@ -32,7 +35,7 @@ app.post('/sucesso', (req, res)=>{
 
 app.get('/deletar/:id', (req, res)=>{
   Post.destroy({where: {'id': req.params.id}}).then(()=>{
-    res.send('Post deletado com sucesso!')
+    res.redirect('/del')
   }).catch((error)=>{
     console.log('Não foi possível deletar o post: '+ error)
   })
